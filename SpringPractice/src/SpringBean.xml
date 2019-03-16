@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- bean definitions here -->
+	<bean id="employee1" class="com.practice.MyPackage.Employee" init-method="callme"  lazy-init="default" abstract="false">
+		<property name= "empNumber" value="1"/>
+		<property name= "empName" value="virendra"/>
+	</bean>
+	
+	<bean id="employee2" class="com.practice.MyPackage.Employee" >
+		<constructor-arg name="empNumber" value="2"/>
+		<constructor-arg name="empName" value="jay1"/>
+	</bean>
+	
+	<bean id="employee6" class="com.practice.MyPackage.Employee" scope="singleton" init-method="callme" depends-on="e"  >
+		<constructor-arg name="empNumber" value="2"/>
+		<constructor-arg name="empName" value="jay2"/>
+	</bean>
+	
+	<bean id="e" class="com.practice.MyPackage.Employee" scope="singleton" init-method="callme" abstract="false" lazy-init="true" autowire-candidate="false">
+		<constructor-arg name="empNumber" value="2"/>
+		<constructor-arg name="empName" value="jj"/>
+	</bean>
+	
+	<bean id="department1" class="com.practice.MyPackage.Department" autowire="byName" lazy-init="false" init-method="callmeDepartment" destroy-method="destroyMe" >
+		<property name="deptName" value="computer"/>
+	</bean>
+	
+	
+	<!-- <bean id="department2" class="com.practice.MyPackage.Department" autowire="byType" lazy-init="false" init-method="callmeDepartment" >
+		<property name="deptName" value="computer"/>
+	</bean> -->
+	
+</beans>
